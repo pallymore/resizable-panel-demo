@@ -1,0 +1,16 @@
+.welcome {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  .check-icon {
+    color: #6d9833;
+  }
+
+  .external-links {
+    margin: 2rem 0;
+  }
+}

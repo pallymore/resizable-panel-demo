@@ -1,0 +1,49 @@
+@font-face {
+  font-family: 'ProximaNova';
+  src: url(./fonts/ProximaNova-Regular.woff2) format('woff2'),
+    url(./fonts/ProximaNova-Regular.woff) format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'ProximaNova';
+  src: url(./fonts/ProximaNova-Bold.woff2) format('woff2'),
+    url(./fonts/ProximaNova-Bold.woff) format('woff');
+  font-weight: bold;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'iA Writer Duospace';
+  src: url(./fonts/iAWriterDuospace-Regular.woff2) format('woff2'),
+    url(./fonts/iAWriterDuospace-Regular.woff) format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'iA Writer Duospace';
+  src: url(./fonts/iAWriterDuospace-Bold.woff2) format('woff2'),
+    url(./fonts/iAWriterDuospace-Bold.woff) format('woff');
+  font-weight: bold;
+  font-style: normal;
+}
+
+html,
+body,
+#root {
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+html body * {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'ProximaNova', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
+    'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
