@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useRef, useEffect, useState } from 'react';
 
 import {
   SidePanel,
@@ -10,9 +10,55 @@ import {
 import './ResizablePanel.scss';
 
 export const ResizablePanel = () => {
+  const panel = useRef(null);
+  const [isResizing, setIsResizing] = useState(false);
+
+  const startResizing = useCallback(() => setIsResizing(true), []);
+  const stopResizing = useCallback(() => setIsResizing(false), []);
+
+  const handleResize = useCallback((e) => {
+    if (!panel.current) {
+      return;
+    }
+
+    e.preventDefault();
+
+    const maxWidth = window.innerWidth / 2;
+    const minWidth = 19 * 16; // 19rem
+    let newWidth = window.innerWidth - e.pageX; // right side panel only
+
+    if (newWidth >= maxWidth) {
+      newWidth = maxWidth;
+    }
+    if (newWidth <= minWidth) {
+      newWidth = minWidth;
+    }
+
+    panel.current.style.width = `${newWidth}px`;
+  }, []);
+
+  useEffect(() => {
+    if (!isResizing) {
+      return undefined;
+    }
+
+    document.addEventListener('pointermove', handleResize);
+    document.addEventListener('pointerup', stopResizing);
+
+    return () => {
+      document.removeEventListener('pointermove', handleResize);
+      document.removeEventListener('pointerup', stopResizing);
+    };
+  }, [handleResize, isResizing, stopResizing]);
+
   return (
-    <SidePanel className="resizable-panel">
-      <div className="resize-handle" title="Resize" role="button">
+    <SidePanel className="resizable-panel" ref={panel} data-testid="side-panel">
+      <div
+        className="resize-handle"
+        title="Resize"
+        role="button"
+        onPointerDown={startResizing}
+      >
         <ChevronLeft />
       </div>
       <div className="side-panel-content">
@@ -64,4 +110,3 @@ export const ResizablePanel = () => {
     </SidePanel>
   );
 };
-
