@@ -55,35 +55,6 @@ describe('ResizablePanel', () => {
         });
       });
 
-      it('does not make the panel wider than 50% width of the screen', () => {
-        const sidePanel = screen.getByTestId('side-panel');
-        act(() => {
-          // window.innerWidth = 1024 - 424 = 600 > 512
-          // newWidth > 1024/2 = 512
-          fireEvent(
-            document,
-            new window.FakeMouseEvent('pointermove', { pageX: 424 })
-          );
-        });
-
-        expect(sidePanel).toHaveStyle({ width: `${window.innerWidth / 2}px` });
-      });
-
-      it('does not make the panel narrower than 19*16px', () => {
-        const sidePanel = screen.getByTestId('side-panel');
-        act(() => {
-          // 19 * 16 = 304
-          // newWidth < 304
-          // window.innerWidth = 1024 - 924 < 304
-          fireEvent(
-            document,
-            new window.FakeMouseEvent('pointermove', { pageX: 924 })
-          );
-        });
-
-        expect(sidePanel).toHaveStyle({ width: `${19 * 16}px` });
-      });
-
       it('stops resizing when pointer goes up', () => {
         act(() => {
           fireEvent.pointerUp(document);
